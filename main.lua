@@ -78,7 +78,7 @@ MainSection:Slider({
     Name = "Bypass Speed",
     Min = 0.01,
     Max = 0.5,
-    Step = 0.01
+    Step = 0.01,
     Default = 0.05,
     Callback = function(Value)
         _G.WaitTime = Value
