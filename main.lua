@@ -91,16 +91,32 @@ local AdvancedTab = Window:NewTab("Advanced")
 local AdvancedSection = AdvancedTab:NewSection("Teleport Features", true)
 
 AdvancedSection:Button({
-    Name = "Teleport ke Sky Island (SpawnBox11)",
+    Name = "Teleport ke Sky Island",
     Callback = function()
-        local target = workspace:FindFirstChild("SkyIslandPets") and workspace.SkyIslandPets.SpawnBoxes:FindFirstChild("SpawnBox11")
         local root = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
         
-        if target and root then
-            root.CFrame = target.CFrame * CFrame.new(0, 3, 0)
-            UI:Notify({Title = "Teleport Success", Content = "Berhasil pindah ke SpawnBox11", Time = 3})
+        if root then
+            -- Koordinat yang Anda berikan dengan Y yang sudah dinaikkan (+3) agar tidak bug
+            local targetPos = Vector3.new(-36.14504623413086, 831.3956298828125, -2729.593994140625)
+            
+            -- Eksekusi Teleport menggunakan CFrame
+            root.CFrame = CFrame.new(targetPos)
+            
+            -- Reset Velocity & RotVelocity agar karakter berhenti total (Anti-Miring)
+            root.Velocity = Vector3.new(0, 0, 0)
+            root.RotVelocity = Vector3.new(0, 0, 0)
+            
+            UI:Notify({
+                Title = "Teleport Success", 
+                Content = "Berhasil pindah ke Koordinat Sky Island", 
+                Time = 3
+            })
         else
-            UI:Notify({Title = "Error", Content = "Lokasi tidak ditemukan!", Time = 3})
+            UI:Notify({
+                Title = "Error", 
+                Content = "Karakter atau HumanoidRootPart tidak ditemukan!", 
+                Time = 3
+            })
         end
     end
 })
