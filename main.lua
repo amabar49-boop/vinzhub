@@ -79,6 +79,7 @@ MainSection:Slider({
     Min = 0.01,
     Max = 0.5,
     Default = 0.05,
+    step = 0.01,
     Callback = function(Value)
         _G.WaitTime = Value
     end
