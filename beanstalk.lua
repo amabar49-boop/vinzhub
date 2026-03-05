@@ -20,7 +20,6 @@ local InteractSection = MainTab:NewSection("Interactions", true)
 local TpSection = TeleportTab:NewSection("Secret Locations", true)
 local BaseSection = TeleportTab:NewSection("My Plot", true)
 local PlayerSection = PlayerTab:NewSection("Movement", true)
-local CoordSection = PlayerTab:NewSection("Position Viewer", true)
 local SettingSection = SettingsTab:NewSection("Maintenance", true)
 
 -- Variabel Kontrol
