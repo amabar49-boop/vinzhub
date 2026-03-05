@@ -3,24 +3,24 @@ local UI = loadstring(game:HttpGet("https://script.vinzhub.com/newlib"))()
 
 -- 2. Window Utama
 local Window = UI:New({
-    Title = "VinzHub - Beanstalk Hub",
-    Footer = "Lock Position Update • v3.2",
+    Title = "VinzHub - BEANSTALK",
+    Footer = "KURANG AUTO FARM!!",
     Logo = "rbxassetid://93128969335561"
 })
 
 -- 3. Membuat Tab
-local MainTab = Window:NewTab("Main Features")
-local TeleportTab = Window:NewTab("Teleport")
-local PlayerTab = Window:NewTab("Player")
-local SettingsTab = Window:NewTab("Settings")
+local MainTab = Window:NewTab("MAIN")
+local TeleportTab = Window:NewTab("TELEPORT")
+local PlayerTab = Window:NewTab("PLAYER")
+local SettingsTab = Window:NewTab("SETTINGS")
 
 -- 4. Membuat Section
-local FarmSection = MainTab:NewSection("Auto Farming", true)
-local InteractSection = MainTab:NewSection("Interactions", true)
-local TpSection = TeleportTab:NewSection("Secret Locations", true)
-local BaseSection = TeleportTab:NewSection("My Plot", true)
-local PlayerSection = PlayerTab:NewSection("Movement", true)
-local SettingSection = SettingsTab:NewSection("Maintenance", true)
+local FarmSection = MainTab:NewSection("AUTO FARMING", true)
+local InteractSection = MainTab:NewSection("INTERACTIONS", true)
+local BaseSection = TeleportTab:NewSection("MY PLOT", true)
+local TpSection = TeleportTab:NewSection("SECRET LOCATIONS", true)
+local PlayerSection = PlayerTab:NewSection("MOVEMENT", true)
+local SettingSection = SettingsTab:NewSection("MAINTENANCE", true)
 
 -- Variabel Kontrol
 _G.AutoCollect = false
@@ -60,46 +60,11 @@ local function teleportTo(coords)
 end
 
 --- ==========================================
---- TAB: TELEPORT (UPDATE MULTI X10 + LOCK)
+--- TAB: TELEPORT (FULL LIST + LOCK)
 --- ==========================================
 
-TpSection:Button({
-    Name = "Teleport to Multi x10",
-    Callback = function()
-        teleportTo(MultiCoords)
-    end
-})
-
-TpSection:Toggle({
-    Name = "Lock Position at Multi x10",
-    Default = false,
-    Callback = function(state)
-        _G.LockPos = state
-        if state then
-            task.spawn(function()
-                UI:Notify({Title = "Lock Active", Content = "Karakter terkunci di area Multi x10", Time = 3})
-                while _G.LockPos do
-                    local char = game.Players.LocalPlayer.Character
-                    if char and char:FindFirstChild("HumanoidRootPart") then
-                        -- Mengunci CFrame agar tidak jatuh atau bergeser
-                        char.HumanoidRootPart.CFrame = CFrame.new(MultiCoords)
-                        -- Menghentikan kecepatan agar tidak mental
-                        char.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
-                    end
-                    task.wait() -- Tanpa delay agar penguncian sangat ketat
-                end
-            end)
-        end
-    end
-})
-
--- Secret Locations Lainnya
-TpSection:Button({ Name = "Divine", Callback = function() teleportTo(Vector3.new(-166.14, 1480.0, 1368.65)) end })
-TpSection:Button({ Name = "Secret", Callback = function() teleportTo(Vector3.new(-166.14, 1067.0, 1368.65)) end })
-TpSection:Button({ Name = "Common", Callback = function() teleportTo(Vector3.new(-159.887, 4.5, 1366.399)) end })
-
 BaseSection:Button({
-    Name = "Teleport to My Base",
+    Name = "TELEPORT TO BASE",
     Callback = function()
         local id = getMySlotId()
         if id then
@@ -109,12 +74,26 @@ BaseSection:Button({
     end
 })
 
+TpSection:Button({
+    Name = "MULTI X10 CASH",
+    Callback = function() teleportTo(MultiCoords) end
+})
+
+-- Daftar Lengkap Lokasi Rahasia
+TpSection:Button({ Name = "DIVINE", Callback = function() teleportTo(Vector3.new(-166.13998413085938, 1480, 1368.6556396484375)) end })
+TpSection:Button({ Name = "SECRET", Callback = function() teleportTo(Vector3.new(-166.13998413085938, 1067, 1368.6556396484375)) end })
+TpSection:Button({ Name = "EXOTIC", Callback = function() teleportTo(Vector3.new(-166.13998413085938, 683.5, 1368.6556396484375)) end })
+TpSection:Button({ Name = "MYTHIC", Callback = function() teleportTo(Vector3.new(-166.13998413085938, 429, 1368.6556396484375)) end })
+TpSection:Button({ Name = "LEGENDARY", Callback = function() teleportTo(Vector3.new(-166.13995361328125, 225.5, 1368.656005859375)) end })
+TpSection:Button({ Name = "RARE", Callback = function() teleportTo(Vector3.new(-166.13995361328125, 76, 1368.656005859375)) end })
+TpSection:Button({ Name = "COMMON", Callback = function() teleportTo(Vector3.new(-159.88729858398438, 4.5, 1366.3992919921875)) end })
+
 --- ==========================================
 --- TAB: MAIN FEATURES
 --- ==========================================
 
 FarmSection:Toggle({
-    Name = "Auto Collect",
+    Name = "AUTO COLLECT",
     Default = false,
     Callback = function(state)
         _G.AutoCollect = state
@@ -142,7 +121,7 @@ FarmSection:Toggle({
 })
 
 InteractSection:Toggle({
-    Name = "Instant Interact",
+    Name = "INSTANT INTERACT",
     Default = false,
     Callback = function(state)
         _G.InstantInteract = state
@@ -158,18 +137,26 @@ InteractSection:Toggle({
 --- ==========================================
 
 PlayerSection:Slider({
-    Name = "WalkSpeed", Min = 16, Max = 250, Default = 16,
+    Name = "WALKSPEED", Min = 16, Max = 250, Default = 16,
     Callback = function(v) _G.CurrentWalkSpeed = v; if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end end
 })
 
 PlayerSection:Slider({
-    Name = "Jump Power", Min = 50, Max = 500, Default = 50,
+    Name = "JUMP POWER", Min = 50, Max = 500, Default = 50,
     Callback = function(v) _G.CurrentJumpPower = v; local h = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") if h then h.UseJumpPower = true h.JumpPower = v end end
 })
 
-SettingSection:Toggle({ Name = "Anti-AFK Mode", Default = false, Callback = function(state) _G.AntiAFK = state end })
-game.Players.LocalPlayer.Idled:Connect(function() if _G.AntiAFK then game:GetService("VirtualUser"):CaptureController() game:GetService("VirtualUser"):ClickButton2(Vector2.new()) end end)
+SettingSection:Toggle({ Name = "ANTI-AFK MODE", Default = false, Callback = function(state) _G.AntiAFK = state end })
 
+-- Sistem Anti-AFK Internal
+game.Players.LocalPlayer.Idled:Connect(function() 
+    if _G.AntiAFK then 
+        game:GetService("VirtualUser"):CaptureController() 
+        game:GetService("VirtualUser"):ClickButton2(Vector2.new()) 
+    end 
+end)
+
+-- Anti-Reset saat Respawn
 game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
     local hum = char:WaitForChild("Humanoid")
     task.wait(0.7)
@@ -178,4 +165,4 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
     hum.JumpPower = _G.CurrentJumpPower
 end)
 
-UI:Notify({Title = "VinzHub v3.2", Content = "Multi x10 Updated & Position Lock Ready!", Time = 5})
+UI:Notify({Title = "VinzHub v67", Content = "Script Ready! Gabisa ngoding bang.", Time = 5})
