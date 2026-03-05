@@ -3,8 +3,8 @@ local UI = loadstring(game:HttpGet("https://script.vinzhub.com/newlib"))()
 
 -- 2. Window Utama
 local Window = UI:New({
-    Title = "VinzHub - Beanstalk Hub",
-    Footer = "Main Edition • v2.9",
+    Title = "VinzHub - Beanstalk Brainrot",
+    Footer = "Gabut Jir • v67",
     Logo = "rbxassetid://93128969335561"
 })
 
