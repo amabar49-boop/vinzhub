@@ -1,2 +1,0 @@
-# vinzhub
-Alamak
